@@ -1,0 +1,118 @@
+﻿@{
+    List<Lylich> dsDaDangky = ViewBag.DSDaDangky as List<Lylich>;
+    List<Lylich> dsChuaDangky = ViewBag.DSChuaDangky as List<Lylich>;
+}
+<h3>Danh sach hoc vien da dang ky</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ma so
+            </th>
+            <th>
+                Ho ten
+            </th>
+            <th>
+                Ngay sinh
+            </th>
+            <th>
+                Phai
+            </th>
+            <th>
+                Ma lop
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in dsDaDangky)
+        {
+            <tr>
+                <td>
+                    @item.Mshv
+                </td>
+                <td>
+                    @item.Tenhv
+                </td>
+                <td>
+                    @item.Ngaysinh.Value.ToShortDateString()
+                </td>
+                <td>
+                    @(item.Phai == true ? "Nam" : "Nu")
+                </td>
+                <td>
+                    @item.Malop
+                </td>
+                @* <td>
+            @item.MalopNavigation.Tenlop
+            </td> *@
+            @{
+                Dictionary<string, string> dHDK = new Dictionary<string, string>();
+                dHDK.Add("mshv", item.Mshv);
+                dHDK.Add("msmh", ViewBag.MaMonhoc);
+            }
+                <td>
+                    <a asp-controller="Dangky" asp-action="huyDangky" asp-all-route-data="@dHDK" class="btn btn-primary">Huy dang ky</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<h3>Danh sach hoc vien chua dang ky</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ma so
+            </th>
+            <th>
+                Ho ten
+            </th>
+            <th>
+                Ngay sinh
+            </th>
+            <th>
+                Phai
+            </th>
+            <th>
+                Ma lop
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in dsChuaDangky)
+        {
+            <tr>
+                <td>
+                    @item.Mshv
+                </td>
+                <td>
+                    @item.Tenhv
+                </td>
+                <td>
+                    @item.Ngaysinh.Value.ToShortDateString()
+                </td>
+                <td>
+                    @(item.Phai == true ? "Nam" : "Nu")
+                </td>
+                <td>
+                    @item.Malop
+                </td>
+                @* <td>
+            @item.MalopNavigation.Tenlop
+            </td> *@
+                @{
+                    Dictionary<string, string> dDK = new Dictionary<string, string>();
+                    dDK.Add("mshv", item.Mshv);
+                    dDK.Add("msmh", ViewBag.MaMonhoc);
+                }
+                <td>
+                    <a asp-controller="Dangky" asp-action="dangkyMonhoc" asp-all-route-data="@dDK" class="btn btn-primary">Dang ky</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

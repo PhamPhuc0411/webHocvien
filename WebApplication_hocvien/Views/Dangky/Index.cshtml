@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dang ky mon hoc</h1>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <span class="fm-bold">Lop: </span>
+    </div>
+    <div class="col-md-10">
+        <select id="idLop" asp-items="@ViewBag.DSLop" onchange="luaChon()" class="form-select"></select>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <span class="fm-bold">Mon hoc: </span>
+    </div>
+    <div class="col-md-10">
+        <select id="idMonhoc" asp-items="@ViewBag.DSMonhoc" onchange="luaChon()" class="form-select"></select>
+    </div>
+</div>
+<br />
+<div id="idHocvien"></div>
+
+<script>
+    function luaChon() {
+        let ml = document.getElementById("idLop").value;
+        let mh = document.getElementById("idMonhoc").value;
+        let data = { malop: ml, msmh: mh };
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            document.getElementById("idHocvien").innerHTML = xhttp.responseText;
+        }
+        const url = "/Dangky/hienthiDSHocvien";
+        xhttp.open("POST", url);
+        xhttp.setRequestHeader("Content-Type", "Application/Json");
+        xhttp.send(JSON.stringify(data));
+    }
+</script>

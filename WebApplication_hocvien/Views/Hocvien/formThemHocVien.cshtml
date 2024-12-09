@@ -1,0 +1,56 @@
+﻿@model WebApplication_hocvien.MyModels.CHocvien
+
+@{
+    ViewData["Title"] = "formThemHocVien";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>formThemHocVien</h1>
+
+<h4>Lylich</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="themHocVien" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Mshv" class="control-label"></label>
+                <input asp-for="Mshv" class="form-control" />
+                <span asp-validation-for="Mshv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tenhv" class="control-label"></label>
+                <input asp-for="Tenhv" class="form-control" />
+                <span asp-validation-for="Tenhv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ngaysinh" class="control-label"></label>
+                <input type="date" asp-for="Ngaysinh" class="form-control" />
+                <span asp-validation-for="Ngaysinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phai" class="control-label"></label>
+                <select asp-for="Phai" class="form-select">
+                    <option value="true">Nam</option>
+                    <option value="false">Nu</option>
+                </select>
+                @* <input asp-for="Phai" class="form-control" />
+                <span asp-validation-for="Phai" class="text-danger"></span> *@
+            </div>
+            <div class="form-group">
+                <label asp-for="Malop" class="control-label"></label>
+                <select asp-for="Malop" asp-items="@ViewBag.DSLop" class="form-select"></select>
+                @* <input asp-for="Malop" class="form-control" />
+                <span asp-validation-for="Malop" class="text-danger"></span> *@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Them" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

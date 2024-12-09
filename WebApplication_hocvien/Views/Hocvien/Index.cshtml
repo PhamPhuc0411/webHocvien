@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication_hocvien.MyModels.CHocvien>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sach hoc vien</h1>
+
+<p>
+    <a asp-action="formThemHocVien" class="btn btn-primary">Them hoc vien</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mshv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tenhv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ngaysinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Malop)
+            </th>
+            <th>
+                Ten lop
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mshv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenhv)
+            </td>
+            <td>
+                @item.Ngaysinh.Value.ToShortDateString()
+            </td>
+            <td>
+                @(item.Phai==true?"Nam":"Nu")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Malop)
+            </td>
+            @* <td>
+                @item.MalopNavigation.Tenlop
+            </td> *@
+            <td>
+                <a asp-action="formSuaHocvien" asp-route-id="@item.Mshv" class="btn btn-primary">Sua</a> |
+                <a asp-action="formXoaHocvien" asp-route-id="@item.Mshv" class="btn btn-primary">Xóa</a>
+                <a asp-action="xemDiemHocvien" asp-route-id="@item.Mshv" class="btn btn-primary">Xem diem</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
